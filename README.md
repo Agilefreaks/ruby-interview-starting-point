@@ -13,7 +13,14 @@ This repo will serve as a starting point for your code challenge. Feel free to c
 ## Local setup
 1. Install ruby: `$ rvm install 3.0.2`
 2. `$ cd .` or `$ cd <path_to_project>` to auto-create the rvm gemset
-3. Install the dependencies: `$ bundle install`
+3. Install bundler: `$ gem install bundler`
+4. Install the dependencies with bundler: `$ bundle install`
+
+## Run sample CLI command
+`$ bin/ruby-interview`
+
+## Run tests
+`$ bundle exec rspec`
 
 ## Tools
 

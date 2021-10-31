@@ -1,0 +1,14 @@
+AllCops:
+  SuggestExtensions: false
+  NewCops: enable
+  TargetRubyVersion: 3.0.2
+  Exclude:
+    - 'vendor/**/*.rb'
+    - 'db/**/*.rb'
+    - 'bin/**/*'
+
+Layout/LineLength:
+  Max: 120
+
+Style/Documentation:
+  Enabled: false

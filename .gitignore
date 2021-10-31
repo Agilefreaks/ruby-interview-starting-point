@@ -13,6 +13,14 @@
 # Used by dotenv library to load environment variables.
 # .env
 
+# IDE
+.idea
+
+# Testing
+coverage
+spec/reports
+spec/examples.txt
+
 # Ignore Byebug command history file.
 .byebug_history
 
