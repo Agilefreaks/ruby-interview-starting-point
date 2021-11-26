@@ -1,66 +1,49 @@
-require 'open-uri'
-require 'csv'
+require_relative '../lib/csv_parser'
+require_relative '../lib/distance_calculator'
 
 class DataProcessor
 
-  def initialize(user_x, user_y, url)
-    @user_x = Float(user_x)
-    @user_y = Float(user_y)
-    @url = URI.parse(url)
+  attr_reader :user_x, :user_y, :file_url
 
-  rescue => ex
-    puts "Invalid arguments: #{ex.message}"
+  def initialize(user_x, user_y, url)
+    @user_x = user_x
+    @user_y = user_y
+    @file_url = url
   end
 
 
-  def process_data
-    raise '`user_x` must be a valid coordinate' unless @user_x.between?(-90, 90)
-    raise '`user_y` must be a valid coordinate' unless @user_y.between?(-180, 180)
+  def get_closest_shops(max_count)
 
+    setup_variables
 
-    # read file data
-    file_obj = @url.open { |f| f.read }
-    shop_data = CSV.parse(file_obj)
+    shop_list = CsvParser.new(file_url).get_data
 
-
-    # get closest shops
-    closest_shops = shop_data.map{ |col| { name: col[0],
-                                           shop_x: col[1],
-                                           shop_y: col[2],
-                                           distance: distance_in_km(@user_x, @user_y, Float(col[1]), Float(col[2])) } }
-
-    closest_shops.sort_by! { |k| Float(k[:distance]) }
-
-
-    # print results
-    puts 'These are the three closest coffee shops we found:'
-    closest_shops.take(3).each do |shop|
-      puts "#{shop[:name]} is #{shop[:distance]} km away"
+    shop_list.each do |shop|
+      distance_in_km = DistanceCalculator.new(user_x, user_y, shop[:shop_x], shop[:shop_y]).call
+      shop[:distance] = distance_in_km
     end
 
-  rescue => ex
-    puts "Failed processing data: #{ex.message}"
+    shop_list.sort_by{ |k| k[:distance] }.take(max_count)
+
+  rescue ArgumentError
+    puts 'Please provide valid coordinates'
+
+  rescue URI::InvalidURIError
+    puts 'Please provide a valid URL'
   end
 
 
 
-  private def distance_in_km(lat1, lon1, lat2, lon2)
-    earth_radius = 6371
-    rad_per_deg = Math::PI/180
 
-    lat_rad = rad_per_deg * (lat2 - lat1)
-    lon_rad = rad_per_deg * (lon2 - lon1)
+  private
 
-    lat1_rad = rad_per_deg * lat1
-    lat2_rad = rad_per_deg * lat2
 
-    a = Math.sin(lat_rad/2)**2 + Math.sin(lon_rad/2)**2 * Math.cos(lat1_rad) * Math.cos(lat2_rad)
-    c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a))
+  def setup_variables
+    @user_x = Float(user_x)
+    @user_y = Float(user_y)
+    @file_url = URI.parse(file_url)
 
-    distance = earth_radius * c
-
-    return '%.4f' % distance
+    raise ArgumentError unless user_x.between?(-90, 90) && user_y.between?(-180, 180)
   end
-
 
 end

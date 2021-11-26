@@ -3,4 +3,9 @@
 
 require_relative '../lib/data_processor'
 
-DataProcessor.new(*ARGV).process_data
+closest_shops = DataProcessor.new(*ARGV).get_closest_shops(3)
+
+puts "These are the #{closest_shops.count} closest coffee shops we found:"
+closest_shops.each do |shop|
+  puts "#{shop[:name]} is #{shop[:distance]} km away"
+end
