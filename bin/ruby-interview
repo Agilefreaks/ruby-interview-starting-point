@@ -1,4 +1,6 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-puts 'Good luck!'
+require_relative '../lib/data_processor'
+
+DataProcessor.new(*ARGV).process_data
