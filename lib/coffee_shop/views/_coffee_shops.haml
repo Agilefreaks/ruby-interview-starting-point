@@ -1,0 +1,7 @@
+- unless @coffee_shops.nil?
+  - @coffee_shops.each do |coffee_shop|
+    %ul
+      %h3 #{coffee_shop[:name]}
+      %li= "Name: #{coffee_shop[:name]}"
+      %li= "Latitude: #{coffee_shop[:latitude]}"
+      %li= "Longitude: #{coffee_shop[:longitude]}"
