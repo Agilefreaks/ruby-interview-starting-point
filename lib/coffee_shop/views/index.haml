@@ -1,8 +1,4 @@
-%title Coffee Shops
-%h1 Coffee Shops finder
-%head
-
-%a.button(href='/search') Search coffee shops near you
-
-%body
-  = haml :_coffee_shops, layout: false
+= haml :_style, locals: { button_label: 'Search coffee shops near you',
+                          page_title: 'Coffee Shops finder',
+                          button_href: '/search' }
+= haml :_coffee_shops

@@ -1,14 +1,15 @@
-%form(action='/search' method='get')
-  %label(for='latitude') Latitude:
-  %input(type='number' name='latitude' value = @latitude required step = '0.0001' min = '-90' max = '90')
-  %label(for='longitude') Longitude:
-  %input(type='number' name='longitude' value = @longitude required step='0.0001' min = '-180' max = '180')
-  %button(type='submit') Search
+= haml :_style, locals: { button_label: 'Back',
+                          page_title: 'Find coffee shops around you',
+                          button_href: '/' }
 
-- unless @latitude.nil? && @longitude.nil?
-  %a.button(href='/search') Clear coordinates
+%form(action='/search' method='get'){ class: 'form-control bg-dark rounded border-secondary text-white' }
+  %label.form-label(for='latitude') Latitude:
+  %input.form-control(type='number' name='latitude' value = @latitude required step = '0.0001' min = '-90' max = '90')
+  %label.form-label(for='longitude') Longitude:
+  %input.form-control(type='number' name='longitude' value = @longitude required step='0.0001' min = '-180' max = '180')
 
-%a.button(href='/') Back
-
-%body
-  = haml :_coffee_shops, layout: false
+  %div{class:'d-flex w-100 align-items-center gap-4 my-2'}
+    %button.btn.btn-success(type='submit') Search
+    - unless @latitude.nil? && @longitude.nil?
+      %a.button.btn.btn-danger(href='/search') Clear coordinates
+= haml :_coffee_shops
