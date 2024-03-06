@@ -24,18 +24,17 @@ RSpec.describe CoffeeShop::App do
 
       it 'renders the coffee shop name correctly' do
         get_root
-        expect(last_response.body).to match(%r{<h3>Coffee_Shop1</h3>})
-        expect(last_response.body).to match(%r{<li>Name: Coffee_Shop1</li>})
+        expect(last_response.body).to match(%r{<td>Coffee_Shop1</td>})
       end
 
       it 'renders the coffee shop latitude correctly' do
         get_root
-        expect(last_response.body).to match(%r{<li>Latitude: 123.0</li>})
+        expect(last_response.body).to match(%r{<td>123.0</td>})
       end
 
       it 'renders the coffee shop longitude correctly' do
         get_root
-        expect(last_response.body).to match(%r{<li>Longitude: 34.0</li>})
+        expect(last_response.body).to match(%r{<td>34.0</td>})
       end
     end
 
@@ -74,21 +73,21 @@ RSpec.describe CoffeeShop::App do
       end
 
       it 'renders the data from first coffee shop' do
-        expect(last_response.body).to match(%r{<li>Name: Starbucks Moscow</li>})
-        expect(last_response.body).to match(%r{<li>Latitude: 55.752047</li>})
-        expect(last_response.body).to match(%r{<li>Longitude: 37.595242</li>})
+        expect(last_response.body).to match(%r{<td>Starbucks Moscow</td>})
+        expect(last_response.body).to match(%r{<td>55.752047</td>})
+        expect(last_response.body).to match(%r{<td>37.595242</td>})
       end
 
       it 'renders the data from second coffee shop' do
-        expect(last_response.body).to match(%r{<li>Name: Starbucks Rio De Janeiro</li>})
-        expect(last_response.body).to match(%r{<li>Latitude: -22.923489</li>})
-        expect(last_response.body).to match(%r{<li>Longitude: -43.234418</li>})
+        expect(last_response.body).to match(%r{<td>Starbucks Rio De Janeiro</td>})
+        expect(last_response.body).to match(%r{<td>-22.923489</td>})
+        expect(last_response.body).to match(%r{<td>-43.234418</td>})
       end
 
       it 'renders the data from third coffee shop' do
-        expect(last_response.body).to match(%r{<li>Name: Starbucks Sydney</li>})
-        expect(last_response.body).to match(%r{<li>Latitude: -33.871843</li>})
-        expect(last_response.body).to match(%r{<li>Longitude: 151.206767</li>})
+        expect(last_response.body).to match(%r{<td>Starbucks Sydney</td>})
+        expect(last_response.body).to match(%r{<td>-33.871843</td>})
+        expect(last_response.body).to match(%r{<td>151.206767</td>})
       end
     end
 
