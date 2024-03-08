@@ -10,43 +10,42 @@ RSpec.describe CoffeeShop::App do
   end
 
   describe '/' do
+    subject { get '/' }
     context 'when reading URI and returns data' do
-      let(:get_root) { get '/' }
       before do
         stub_request(:get, 'https://raw.githubusercontent.com/Agilefreaks/test_oop/master/coffee_shops.csv')
           .to_return(status: 200, body: 'Coffee_Shop1, 123, 34')
       end
 
       it 'returns a status code of 200OK' do
-        get_root
+        subject
         expect(last_response.status).to eq 200
       end
 
       it 'renders the coffee shop name correctly' do
-        get_root
+        subject
         expect(last_response.body).to match(%r{<td>Coffee_Shop1</td>})
       end
 
       it 'renders the coffee shop latitude correctly' do
-        get_root
+        subject
         expect(last_response.body).to match(%r{<td>123.0</td>})
       end
 
       it 'renders the coffee shop longitude correctly' do
-        get_root
+        subject
         expect(last_response.body).to match(%r{<td>34.0</td>})
       end
     end
 
     context 'when reading URI and does not return data' do
-      let(:get_root) { get '/' }
       before do
         stub_request(:get, 'https://raw.githubusercontent.com/Agilefreaks/test_oop/master/coffee_shops.csv')
           .to_return(status: 200, body: nil)
       end
 
       it 'returns a status code of 200OK' do
-        get_root
+        subject
         expect(last_response.status).to eq 200
       end
     end
