@@ -11,6 +11,8 @@ module CoffeeShop
   class App < Sinatra::Base
     helpers Sinatra::Param
 
+    URL = 'https://raw.githubusercontent.com/Agilefreaks/test_oop/master/coffee_shops.csv'
+
     get '/' do
       @coffee_shops = read_coffee_shop_csv
       haml :index
@@ -31,12 +33,18 @@ module CoffeeShop
     private
 
     def read_coffee_shop_csv
-      url = 'https://raw.githubusercontent.com/Agilefreaks/test_oop/master/coffee_shops.csv'
-      coffee_shops = Net::HTTP.get(URI.parse(url))
+      coffee_shops_data = fetch_csv_data(URL)
+      return unless coffee_shops_data
 
-      return unless coffee_shops
+      parse_coffee_shops_data(coffee_shops_data)
+    end
 
-      csv_data = coffee_shops.split("\n").map { |line| line.split(',') }
+    def fetch_csv_data(url)
+      Net::HTTP.get(URI.parse(url))
+    end
+
+    def parse_coffee_shops_data(coffee_shops_data)
+      csv_data = coffee_shops_data.split("\n").map { |line| line.split(',') }
       csv_data.map do |elem|
         { name: elem[0], latitude: elem[1].to_f, longitude: elem[2].to_f }
       end
