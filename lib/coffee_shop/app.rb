@@ -25,7 +25,11 @@ module CoffeeShop
       @latitude = params[:latitude]
       @longitude = params[:longitude]
 
-      @coffee_shops = nearest({ latitude: @latitude, longitude: @longitude }, read_coffee_shop_csv)
+      coffee_shop_csv_data = read_coffee_shop_csv
+
+      unless coffee_shop_csv_data.nil?
+        @coffee_shops = nearest({ latitude: @latitude, longitude: @longitude }, coffee_shop_csv_data)
+      end
 
       haml :search
     end
@@ -34,13 +38,15 @@ module CoffeeShop
 
     def read_coffee_shop_csv
       coffee_shops_data = fetch_csv_data(URL)
-      return unless coffee_shops_data
+      return if coffee_shops_data.nil?
 
       parse_coffee_shops_data(coffee_shops_data)
     end
 
     def fetch_csv_data(url)
       Net::HTTP.get(URI.parse(url))
+    rescue SocketError => e
+      puts e.to_s
     end
 
     def parse_coffee_shops_data(coffee_shops_data)
