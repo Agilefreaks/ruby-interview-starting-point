@@ -9,7 +9,7 @@ RSpec.describe CoffeeShop::App do
     CoffeeShop::App
   end
 
-  describe '#read_coffee_shop_csv' do
+  describe '/' do
     context 'when reading URI and returns data' do
       let(:get_root) { get '/' }
       before do
