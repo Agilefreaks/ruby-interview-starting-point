@@ -57,6 +57,8 @@ module CoffeeShop
     end
 
     def nearest(origin, points)
+      return if params[:latitude].nil? && params[:longitude].nil?
+
       data = points.map do |point|
         point.merge({ distance: distance(point, origin) })
       end

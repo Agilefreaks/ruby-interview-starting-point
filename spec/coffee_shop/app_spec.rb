@@ -188,5 +188,15 @@ RSpec.describe CoffeeShop::App do
         expect(last_response.body).to eq('Parameter cannot be less than -90')
       end
     end
+
+    context 'when searching with no query params' do
+      before do
+        get '/search'
+      end
+
+      it 'returns a status code 400 Bad Request' do
+        expect(last_response.status).to eq 200
+      end
+    end
   end
 end
