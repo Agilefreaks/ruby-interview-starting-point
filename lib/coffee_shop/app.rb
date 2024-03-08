@@ -17,14 +17,13 @@ module CoffeeShop
     end
 
     get '/search' do
-      unless params[:latitude].nil? && params[:longitude].nil?
-        param :latitude, Float, min: -90, max: 90, required: true
-        param :longitude, Float, min: -180, max: 180, required: true
+      param :latitude, Float, min: -90, max: 90, required: !params[:longitude].nil?
+      param :longitude, Float, min: -180, max: 180, required: !params[:latitude].nil?
 
-        @latitude = params[:latitude]
-        @longitude = params[:longitude]
-        @coffee_shops = nearest({ latitude: params[:latitude], longitude: params[:longitude] }, read_coffee_shop_csv)
-      end
+      @latitude = params[:latitude]
+      @longitude = params[:longitude]
+
+      @coffee_shops = nearest({ latitude: @latitude, longitude: @longitude }, read_coffee_shop_csv)
 
       haml :search
     end
