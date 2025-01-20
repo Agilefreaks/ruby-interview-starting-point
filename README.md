@@ -11,7 +11,7 @@ This repo will serve as a starting point for your code challenge. Feel free to c
 - Have RVM installed: https://letmegooglethat.com/?q=install+rvm+on+ubuntu
 
 ## Local setup
-1. Install ruby: `$ rvm install 3.0.2`
+1. Install ruby: `$ rvm install 3.4.1`
 2. `$ cd .` or `$ cd <path_to_project>` to auto-create the rvm gemset
 3. Install bundler: `$ gem install bundler`
 4. Install the dependencies with bundler: `$ bundle install`

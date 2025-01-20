@@ -1,7 +1,7 @@
 AllCops:
   SuggestExtensions: false
   NewCops: enable
-  TargetRubyVersion: 3.0.2
+  TargetRubyVersion: 3.4.1
   Exclude:
     - 'vendor/**/*.rb'
     - 'db/**/*.rb'
