@@ -13,6 +13,7 @@ gem 'logger'
 gem 'puma', '~> 6.5'
 gem 'rack'
 gem 'rack-cors'
+gem 'rack-test'
 gem 'roda'
 gem 'zeitwerk', '~> 2.6'
 
