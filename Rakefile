@@ -27,3 +27,8 @@ desc 'Run the server'
 task :server do
   sh 'bundle exec rackup'
 end
+
+desc 'Run the tests'
+task :test do
+  sh 'bundle exec rspec'
+end
