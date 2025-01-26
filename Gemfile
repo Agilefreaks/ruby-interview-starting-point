@@ -22,6 +22,7 @@ group :development, :test do
   gem 'dotenv'
   gem 'listen'
   gem 'rspec', '~> 3.10'
+  gem 'webmock'
 end
 
 group :development do
