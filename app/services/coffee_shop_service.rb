@@ -18,7 +18,7 @@ module Services
     def calculate_distances_hash
       @coffee_shops.map do |shop|
         distance = calculate_euclidean_distance(
-          @user_coords[:x], @user_coords[:y],
+          @user_coords[:x].to_f, @user_coords[:y].to_f,
           shop[:x], shop[:y]
         )
         shop.merge(distance: distance)
