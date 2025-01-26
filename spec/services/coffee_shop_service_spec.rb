@@ -12,7 +12,7 @@ RSpec.describe Services::CoffeeShopService, method: :call do
     ]
   end
   let(:instance) { Services::CoffeeShopService.new(user_coords, coffee_shops) }
-  subject(:coffe_shop_services) { instance.call }
+  subject(:coffe_shop_service) { instance.call }
 
   it 'responds with an Array of closest coffee shops' do
     expected_coffee_shops_array =
@@ -22,6 +22,6 @@ RSpec.describe Services::CoffeeShopService, method: :call do
         { name: 'Starbucks SF', x: 37.77, y: -122.42, distance: 9.83 }
       ]
 
-    expect(coffe_shop_services).to eq expected_coffee_shops_array
+    expect(coffe_shop_service).to eq expected_coffee_shops_array
   end
 end
