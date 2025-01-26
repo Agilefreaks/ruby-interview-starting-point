@@ -17,24 +17,4 @@ RSpec.describe Services::FetchCsvService, method: :call do
       expect(fetch_csv_service).to include 'Starbucks'
     end
   end
-
-  context 'when the request fails' do
-    before do
-      stub_request(:get, url).to_return(status: 404, body: 'Not Found')
-    end
-
-    it 'raises an error' do
-      expect { fetch_csv_service }.to raise_error(RuntimeError, /Error fetching CSV: 404/)
-    end
-  end
-
-  context 'when an exception occurs' do
-    before do
-      allow(Net::HTTP).to receive(:get_response).and_raise(StandardError.new('Network error'))
-    end
-
-    it 'raises an error' do
-      expect { fetch_csv_service }.to raise_error(RuntimeError, /Error fetching CSV: Network error/)
-    end
-  end
 end
