@@ -16,9 +16,18 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
-require 'byebug'
+require 'zeitwerk'
+require 'dotenv/load'
 
-Dir[File.join(File.dirname(__FILE__), '../app/**/*.rb')].each { |file| require file }
+$LOAD_PATH.unshift(File.expand_path('../app/roda_plugins', __dir__))
+$LOAD_PATH.unshift(File.expand_path(__dir__))
+
+loader = Zeitwerk::Loader.new
+loader.push_dir(File.expand_path('../app', __dir__))
+loader.setup
+
+# Ensure all files are loaded
+loader.eager_load
 
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
