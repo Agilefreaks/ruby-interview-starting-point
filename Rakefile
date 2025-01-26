@@ -6,7 +6,6 @@ require 'roda'
 require 'irb'
 require 'zeitwerk'
 require 'dotenv/load'
-require 'byebug'
 
 desc 'Start interactive console'
 task :console do
