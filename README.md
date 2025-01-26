@@ -76,3 +76,26 @@ Starbucks Seattle2,0.0645
 Starbucks Seattle,0.0861
 Starbucks SF,10.0793
 ```
+
+## Running the app
+To run the app, I've created a rake task:
+`rake server`
+The app will be available at `http://127.0.0.1:9292`.
+Also I made a rake task for running an interactive console:
+`rake console`
+
+## Example request
+You can make a request to the API using `curl`:
+```
+curl 'http://127.0.0.1:9292/api/v1/closest_coffee_shops?x=47.6&y=-122.4'
+```
+
+## Running the tests
+You can run the tests:
+`rake test`
+
+## Environment variables
+The app uses a `.env` file to load environment variables. If the `.env` file is not present, it will fallback to the default URL specified in the code. You can create a `.env` file from the `.env.example` file:
+```sh
+cp .env.example .env
+```
