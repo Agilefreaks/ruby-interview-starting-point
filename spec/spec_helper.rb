@@ -25,8 +25,6 @@ $LOAD_PATH.unshift(File.expand_path(__dir__))
 loader = Zeitwerk::Loader.new
 loader.push_dir(File.expand_path('../app', __dir__))
 loader.setup
-
-# Ensure all files are loaded
 loader.eager_load
 
 RSpec.configure do |config|
