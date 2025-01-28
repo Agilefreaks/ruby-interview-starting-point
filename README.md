@@ -1,10 +1,25 @@
 <details>
   <summary><i>Local setup</i></summary>
-    1. Install ruby: `$ rvm install 3.4.1`
-    2. `$ cd .` or `$ cd <path_to_project>` to auto-create the rvm gemset
-    3. Install bundler: `$ gem install bundler`
-    4. Install the dependencies with bundler: `$ bundle install`
+
+  1. Install ruby: `$ rvm install 3.4.1`
+  2. `$ cd .` or `$ cd <path_to_project>` to auto-create the rvm gemset
+  3. Install bundler: `$ gem install bundler`
+  4. Install the dependencies with bundler: `$ bundle install`
 </details>
+
+### Code Structure and Purpose
+
+- **Controller to Service**: When a request is received, the controller delegates the task to the appropriate service. **Sinatra** is used to handle HTTP requests and responses in a lightweight manner.
+- **Service to External API**: The `CoffeeShopFinderService` interacts with an external API to retrieve data about coffee shops. It processes this data to find the closest coffee shops based on the provided coordinates.
+- **Response Handling**: After processing the request, the service returns the result to the controller, which then formats the response and sends it back to the client.
+
+### Testing
+
+- **Unit Tests**: The project is thoroughly tested using the `rspec` gem.
+- Run tests ➡️ `$ bundle exec rspec`
+
+
+
 
 # Usage
 #### Run CLI command to start the server
@@ -25,9 +40,6 @@ Coffee shops nearest (47.6, -122.4) by distance:
 0.0861 <--> Starbucks Seattle
 10.0793 <--> Starbucks SF'
 ```
-
-## Run tests
-`$ bundle exec rspec`
 
 ### Disclaimers
 
