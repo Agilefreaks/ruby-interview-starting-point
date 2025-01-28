@@ -22,9 +22,9 @@ class CoffeeShopFinderService
   end
 
   def parse_coffee_shops(response)
-    CSV.parse(response.body, headers: true).map do |row|
+    CSV.parse(response.body, headers: headers).map do |row|
       validate_csv_row!(row)
-      CoffeeShop.new(row['Name'], row['X Coordinate'], row['Y Coordinate'])
+      CoffeeShop.new(row['Name'], row['Lat Coordinate'], row['Lon Coordinate'])
     end
   rescue CSV::MalformedCSVError => e
     raise "Malformed CSV: #{e.message}"
@@ -40,7 +40,11 @@ class CoffeeShopFinderService
 
   # Validate CSV row structure
   def validate_csv_row!(row)
-    missing = %w[Name X Coordinate Y Coordinate].reject { |h| row[h] }
+    missing = headers.reject { |h| row[h] }
     raise "Invalid CSV headers: #{missing.join(', ')}" if missing.any?
+  end
+
+  def headers
+    ['Name', 'Lat Coordinate', 'Lon Coordinate']
   end
 end

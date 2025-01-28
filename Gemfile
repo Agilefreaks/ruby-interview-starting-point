@@ -24,4 +24,7 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'csv'
 gem 'httparty'
 gem 'pry'
+gem 'rack'
+gem 'rack-test'
+gem 'rackup'
 gem 'sinatra'
